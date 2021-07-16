@@ -239,38 +239,41 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-          DropdownButton<double>(
-            value: minIntensity,
-            icon: Row(
-              children: [
-                Text(
-                  "+ Büyüklük",
-                ),
-                Icon(
-                  Icons.arrow_drop_down_rounded,
-                  color: Colors.white,
-                )
-              ],
+          Theme(
+            data: Theme.of(context).copyWith(canvasColor: Colors.orange),
+            child: DropdownButton<double>(
+              value: minIntensity,
+              icon: Row(
+                children: [
+                  Text(
+                    "+ Büyüklük",
+                  ),
+                  Icon(
+                    Icons.arrow_drop_down_rounded,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+              style: const TextStyle(color: Colors.white),
+              underline: Container(),
+              items: <double>[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+                  .map((double value) {
+                return DropdownMenuItem(
+                  value: value,
+                  child: new Text(
+                    value.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                if (value != null)
+                  setState(() {
+                    minIntensity = value;
+                  });
+                _doFilter();
+              },
             ),
-            style: const TextStyle(color: Colors.white),
-            underline: Container(),
-            items: <double>[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-                .map((double value) {
-              return DropdownMenuItem(
-                value: value,
-                child: new Text(
-                  value.toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
-            }).toList(),
-            onChanged: (value) {
-              if (value != null)
-                setState(() {
-                  minIntensity = value;
-                });
-              _doFilter();
-            },
           )
         ],
       ),
